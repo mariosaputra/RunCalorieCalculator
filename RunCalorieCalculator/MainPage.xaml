@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="RunCalorieCalculator.MainPage">
+
+    <ContentPage.Resources>
+        <Style x:Key="InvalidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="LightYellow"/>
+        </Style>
+        <Style x:Key="ValidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Green" />
+        </Style>
+    </ContentPage.Resources>
+
+
+    <ScrollView>
+        <VerticalStackLayout 
+            Spacing="25" 
+            Padding="30,0" 
+            VerticalOptions="Center">
+
+            <Label x:Name="lblGender" Text="Gender" />
+            <HorizontalStackLayout>
+                <RadioButton x:Name="radioMale" Content="Male" GroupName="radioGender" Margin="0,0,15,0" IsChecked="True"/>
+                <RadioButton x:Name="radioFemale" Content="Female" GroupName="radioGender" />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Entry x:Name="entAge" Placeholder="Age" Keyboard="Numeric" TextChanged="EntryTextChanged" Margin="0,0,15,0" WidthRequest="100">
+                    <Entry.Behaviors>
+                        <toolkit:CharactersValidationBehavior 
+                        x:Name="AgeValidation" 
+                        CharacterType="Digit" 
+                        MinimumCharacterTypeCount="1" 
+                        toolkit:MultiValidationBehavior.Error="Error" 
+                        RegexPattern="" 
+                        Flags="ValidateOnUnfocusing,ValidateOnValueChanged"
+                        />
+                    </Entry.Behaviors>
+                </Entry>
+                <Label x:Name="lblYears" Text="years" VerticalOptions="CenterAndExpand"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Entry x:Name="entWeight" Placeholder="Weight" Keyboard="Numeric" TextChanged="EntryTextChanged" Margin="0,0,15,0" WidthRequest="100">
+                    <Entry.Behaviors>
+                        <toolkit:CharactersValidationBehavior 
+                            x:Name="WeightValidation" 
+                            CharacterType="Digit" 
+                            MinimumCharacterTypeCount="1" 
+                            toolkit:MultiValidationBehavior.Error="Error" 
+                            RegexPattern="" 
+                            Flags="ValidateOnUnfocusing,ValidateOnValueChanged"
+                            />
+                    </Entry.Behaviors>
+                </Entry>
+                <Label x:Name="lblWeight" Text="kg" VerticalOptions="CenterAndExpand"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Entry x:Name="entHeight" Placeholder="Height" Keyboard="Numeric" TextChanged="EntryTextChanged" Margin="0,0,15,0" WidthRequest="100">
+                    <Entry.Behaviors>
+                        <toolkit:CharactersValidationBehavior 
+                            x:Name="HeightValidation" 
+                            CharacterType="Digit" 
+                            MinimumCharacterTypeCount="1" 
+                            toolkit:MultiValidationBehavior.Error="Error" 
+                            RegexPattern="" 
+                            Flags="ValidateOnUnfocusing,ValidateOnValueChanged"
+                            />
+                    </Entry.Behaviors>
+                </Entry>
+                <Label x:Name="lblHeight" Text="cm" VerticalOptions="CenterAndExpand"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Entry x:Name="entDuration" Placeholder="Duration" Keyboard="Numeric" TextChanged="EntryTextChanged" Margin="0,0,15,0" WidthRequest="100">
+                    <Entry.Behaviors>
+                        <toolkit:CharactersValidationBehavior 
+                        x:Name="DurationValidation" 
+                        CharacterType="Digit" 
+                        MinimumCharacterTypeCount="1" 
+                        toolkit:MultiValidationBehavior.Error="Error" 
+                        RegexPattern="" 
+                        Flags="ValidateOnUnfocusing,ValidateOnValueChanged"
+                        />
+                    </Entry.Behaviors>
+                </Entry>
+                <Label x:Name="lblDuration" Text="minutes" VerticalOptions="CenterAndExpand"/>
+            </HorizontalStackLayout>
+
+            <Label x:Name="lblSpeed"
+               Text="Running Speed"
+               HorizontalOptions="Start"
+               VerticalOptions="Center" />
+            <Slider x:Name="sldSpeed" Maximum="23" Minimum="6" />
+            <Label x:Name="lblSliderSpeed"
+               Text="{Binding Source={x:Reference sldSpeed},
+                              Path=Value,
+                              StringFormat='{0:F0} km/h'}"/>
+            <Button x:Name="btnCalculate" Text="Calculate"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Clicked="btnCalculate_Clicked" IsEnabled="False" WidthRequest="200"/>
+            <Frame BorderColor="Gray" CornerRadius="5" Padding="8">
+                <Label x:Name="lblResult" Text="" TextColor="Black"/>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
+ 
+</ContentPage>
